@@ -1,0 +1,19 @@
+name: Safety Check
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  check-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate file paths
+        run: |
+          invalid_files=$(git diff --name-only origin/main...HEAD | grep -vE '^(adult_content|fingers_gestures|others|\.github)/' || true)
+          if [ -n "$invalid_files" ]; then
+            echo "Error: Files must be placed inside adult_content/, fingers_gestures/ or others/"
+            echo "$invalid_files"
+            exit 1
+          fi

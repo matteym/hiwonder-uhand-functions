@@ -1,0 +1,21 @@
+name: Welcome PR
+
+on:
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.payload.pull_request.number,
+              owner: context.payload.repository.owner.login,
+              repo: context.payload.repository.name,
+              body: 'Thanks for contributing to the uHandPi gesture catalog! 🤖 A maintainer will review your hand gesture soon.'
+            })
