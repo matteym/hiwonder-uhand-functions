@@ -43,6 +43,11 @@ Navigate into the project folder:
 cd hiwonder-uhand-functions
 ```
 
+To execute any Python function or gesture script on the robot, run:
+
+```Bash
+python3 <script_name>.py
+```
 Folders Directory Structure
 Project files are organized under the following directories:
 
